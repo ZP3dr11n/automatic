@@ -1,0 +1,31 @@
+name: Run Script Periodically
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Rodar a cada 30 minutos
+  workflow_dispatch:  # Também pode ser executado manualmente
+
+jobs:
+  run_python_script:
+    runs-on: ubuntu-latest  # Escolhe a imagem do ambiente
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # Faz o checkout do repositório para o runner
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # Configura o Python
+      with:
+        python-version: '3.x'  # Escolhe a versão do Python
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt  # Instala as dependências
+
+    - name: Run Python script
+      env:
+        TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
+        TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
+        GOOGLE_CREDS: ${{ secrets.GOOGLE_CREDS }}
+      run: |
+        python seu_script.py  # Roda seu script
