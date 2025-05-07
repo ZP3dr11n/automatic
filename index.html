@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meu Power-Up</title>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+  <body>
+    <h1>Power-Up em funcionamento!</h1>
+    <script>
+      // Inicializa o Power-Up
+      TrelloPowerUp.initialize({
+        'board-buttons': function (t, options) {
+          return [{
+            icon: 'https://cdn-icons-png.flaticon.com/512/1828/1828817.png',
+            text: 'Mover por RA',
+            callback: function (t) {
+              alert('Aqui podemos mover cartões com base no RA!');
+              return t.closePopup();
+            }
+          }];
+        }
+      });
+    </script>
+  </body>
+</html>
